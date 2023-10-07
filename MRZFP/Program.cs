@@ -5,9 +5,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 
-//Console.WriteLine("Hello, World!");
-
-const string token = "token";
+string token = System.IO.File.ReadAllText(@"C:\Users\moroz69off\Documents\fdtoken.txt"); // this is temporary solution
 
 TelegramBotClient botClient = new TelegramBotClient(token);
 
@@ -16,7 +14,6 @@ Telegram.Bot.Types.User me = await botClient.GetMeAsync();
 
 using CancellationTokenSource cts = new();
 
-// StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
 ReceiverOptions receiverOptions = new(){AllowedUpdates = Array.Empty<UpdateType>()};
 
 botClient.StartReceiving(
@@ -41,7 +38,6 @@ Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, 
 
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
-    // Only process Message updates: https://core.telegram.org/bots/api#message
     if (update.Message is not { } message)
         return;
     // Only process text messages
@@ -52,16 +48,11 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
 
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-    // Echo received message text
     Message sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
         text: "You said:\n" + messageText,
         cancellationToken: cancellationToken);
 }
-
-
-
-//Console.WriteLine($"I am user {me.Id} and my name is {me.FirstName}.");
 
 Console.ReadKey(false);
 //________
