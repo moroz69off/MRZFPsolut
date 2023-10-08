@@ -1,11 +1,12 @@
-﻿using Telegram.Bot;
+﻿using SysFile = System.IO.File;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 
-string token = System.IO.File.ReadAllText(@"C:\Users\moroz69off\Documents\fdtoken.txt"); // this is temporary solution
+string token = SysFile.ReadAllText(@"C:\Users\moroz69off\Documents\fdtoken.txt"); // this is temporary solution
 
 TelegramBotClient botClient = new TelegramBotClient(token);
 
