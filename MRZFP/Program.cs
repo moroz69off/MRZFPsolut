@@ -27,12 +27,14 @@ botClient.StartReceiving(
 
 
 MRZTele MT = new MRZTele();
+Console.WriteLine(MT.AS);
+Console.WriteLine("_________");
 
 
 
 Task<Chat> test1 = botClient.GetChatAsync("@PoputchikRFDNR");
 Console.WriteLine(test1.Result.Title);
-Console.WriteLine("______________");
+Console.WriteLine("_________");
 
 Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
 {

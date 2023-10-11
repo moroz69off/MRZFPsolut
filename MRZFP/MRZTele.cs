@@ -1,10 +1,11 @@
 ﻿using TdLib;
 
+using System;
+using System.Threading;
+
 internal class MRZTele
 {
-    public MRZTele()
-    {
-        TdClient mClient = new TdClient();
-        TdApi.ChatList mList = new TdLib.TdApi.ChatList();
-    }
+    public TdApi.AuthorizationState AS = new TdApi.AuthorizationState();
+
+
 }
