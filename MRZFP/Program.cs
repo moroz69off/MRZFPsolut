@@ -6,11 +6,12 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 const string botName = "MRZFINDPASS";
+//const long mrzBotID = 464756882;
 string token = SysFile.ReadAllText(@"C:\Users\moroz69off\Documents\fdtoken.txt"); // this is temporary solution
 
 TelegramBotClient botClient = new TelegramBotClient(token);
 
-Telegram.Bot.Types.User me = await botClient.GetMeAsync();
+User me = await botClient.GetMeAsync();
 
 using CancellationTokenSource cts = new();
 
@@ -22,6 +23,16 @@ botClient.StartReceiving(
     receiverOptions: receiverOptions,
     cancellationToken: cts.Token
 );
+
+
+
+MRZTele MT = new MRZTele();
+
+
+
+Task<Chat> test1 = botClient.GetChatAsync("@PoputchikRFDNR");
+Console.WriteLine(test1.Result.Title);
+Console.WriteLine("______________");
 
 Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
 {
@@ -45,12 +56,11 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         return;
 
     var chatId = message.Chat.Id;
-    var bn = BotName.Equals;
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
     Message sentMessage = await botClient.SendTextMessageAsync(
         chatId: chatId,
-        text: "You said:\n" + messageText + " Bot name - " + botName,
+        text: "You said:\n" + messageText,
         cancellationToken: cancellationToken);
 }
 
